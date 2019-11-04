@@ -1,0 +1,173 @@
+---
+title: "Manipulation et visualisation de données avec R"
+author: "Eric Ménétré"
+date: "11/11/2019"
+output: ioslides_presentation
+---
+
+## Menu du jour
+
+- Manipulation de données avec R
+  - Intérêt du package dplyr comparé au package base
+  - les 5 verbes de dplyr + opérateurs complémentaires
+  - la combinaison des verbes par l'opérateur "pipe" %>%
+  - survol de tidyr : spread et gather
+- Visualisation de données avec ggplot2
+  - Comment est structuré le code de ggplot
+  - quelques exemples de plots possibles
+- Ressources en cas de problème
+- Brève introduction à Git
+
+# Manipulation de données avec R
+
+## Intérêt du package dplyr
+
+Pour la manipulation de données, le package base de R n'est pas optimal comparé à d'autres langage tels que SQL par exemple
+
+```{r include=FALSE}
+library(dplyr)
+library(ggplot2)
+
+```
+
+```{r}
+
+head(iris)
+str(iris)
+
+```
+
+## Intérêt du package dplyr
+
+Pour la manipulation de données, le package base de R n'est pas optimal comparé à d'autres langage tels que SQL par exemple
+
+```{r echo=TRUE}
+
+data_temp <- iris[iris$Species == "setosa",]
+
+str(data_temp)
+
+```
+
+
+## Intérêt du package dplyr
+
+Pour la manipulation de données, le package base de R n'est pas optimal comparé à d'autres langage tels que SQL par exemple
+
+Les arguments s'enchainent plus naturellement: data, colonne = "..."
+
+```{r echo=TRUE}
+library(dplyr)
+
+data_temp <- filter(iris, Species == "setosa")
+
+str(data_temp)
+
+```
+
+
+## Intérêt du package dplyr
+
+Permet de combiner les verbes ensembles. Permet de combiner plusieurs opérations sans modifier le dataframe initial ni stocker les données dans une variable temporaire
+
+```{r echo=TRUE}
+library(ggplot2)
+iris%>%
+  filter(Species == "setosa")%>%
+  filter(Sepal.Length > 0.02)%>%
+  select(Sepal.Length, Petal.Length)%>%
+  ggplot(aes(x = Sepal.Length, y = Petal.Length))+
+    geom_jitter()
+
+```
+
+## Les 5 verbes de dplyr + opérateurs complémentaires
+
+dplyr compte 5 verbes/fonctions permettant d'effectuer presque toutes les opérations de manipulation de données. 
+5 verbes :
+
+- filter() : permet de sélectionner seulement certaines lignes en fonction d'un ou plusieurs critères 
+
+- select() : permet de sélectionner seulement certaines colonnes du data frame
+
+- summarize(): permet de regroupper les données et de recalculer directement des moyennes, médiannes, compter...
+
+- mutate() : permet de créer une nouvelle variable en fonction d'une autre ou modification d'une variable existante
+
+
+## Les 5 verbes de dplyr + opérateurs complémentaires
+
+- order() : permet de trier des données par ordre croissant/décroissant
+
+## Les 5 verbes de dplyr + "opérateurs complémentaires"
+
+dplyr compte également des opérateurs complémentaires qui permettent de compléter les 5 verbes: 
+
+- group_by : quand joint à summarize(), permet de regroupper les données en fonction d'une variable (cf. plus loin)
+
+- replace : permet dans le verbe mutate de remplacer une valeur
+
+- rename : permet de renommer une variable dans l'argument mutate
+
+- if_else : dans le verbe mutate, correspond au SI dans Excel
+
+## filter()
+
+filter permet de sélectionner des lignes dans un data frame en fonction d'un critère
+Rappel: pour cumuler les filtres: & = ET ; | = OU. Dans filter, une virgule entre deux arguments correspond à ET. La commande produit un output mais *SANS* modifier le dataframe initial
+
+```{r}
+#filter(data, argument1 &| argument2 &| ... )
+
+filter(iris, Species == "setosa" & Sepal.Length > 0.3)
+
+```
+
+## select()
+Select permet d'isoler uniquement ceraines colonnes
+
+```{r}
+#select(data, colonne1, colonne2,...)
+
+select(iris, Sepal.Width, Sepal.Length)
+
+```
+
+## summarize()
+Summarise/summarize permet de résumer les données à une valeur ou à un groupe de valeur en fonction des niveaux/facteurs d'une autre variables
+
+```{r}
+# ex. summarise(data, moyenne = mean(variable), mediane = median(variable), N = n())
+
+summarise(iris, 
+          moyenne = mean(Sepal.Width), 
+          mediane = median(Sepal.Width), 
+          N = n())
+
+```
+
+
+## summarize() + group_by
+Summarise/summarize permet de résumer les données à une valeur ou à un groupe de valeur en fonction des niveaux/facteurs d'une autre variables
+
+```{r}
+data_temp <- group_by(iris, Species)
+summarise(data_temp,
+          moyenne = mean(Sepal.Width), 
+          mediane = median(Sepal.Width), 
+          N = n())
+
+```
+
+## mutate()
+
+Mutate permet de modifier une colonne ou de créer une colonne en fonction d'une autre colonne. Cette fonction simplifie l'utilisation des boucles for (cf. cours R précédent)
+
+```{r}
+data_temp <- select(iris, Sepal.Width)
+
+mutate(data_temp, 
+       Sepal.Width_2 = Sepal.Width + 3.14)
+```
+
+
