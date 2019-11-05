@@ -76,7 +76,7 @@ str(data_temp)
 
 ## Intérêt du package dplyr
 
-Permet de combiner les verbes ensembles. Permet de combiner plusieurs opérations sans modifier le dataframe initial ni stocker les données dans une variable temporaire
+Permet de combiner les verbes. Permet de combiner plusieurs opérations sans modifier le dataframe initial ni stocker les données dans une variable temporaire
 
 ```{r echo=TRUE, out.width = "300px"}
 library(ggplot2)
@@ -92,7 +92,7 @@ iris%>%
 ## Les 5 verbes de dplyr + opérateurs complémentaires
 
 dplyr compte 5 verbes/fonctions permettant d'effectuer presque toutes les opérations de manipulation de données. 
-5 verbes :
+
 
 - filter() : permet de sélectionner seulement certaines lignes en fonction d'un ou plusieurs critères 
 
@@ -123,6 +123,7 @@ dplyr compte également des opérateurs complémentaires qui permettent de compl
 ## filter()
 
 filter permet de sélectionner des lignes dans un data frame en fonction d'un critère
+
 Rappel: pour cumuler les filtres: & = ET ; | = OU. Dans filter, une virgule entre deux arguments correspond à ET. La commande produit un output mais *SANS* modifier le dataframe initial
 
 ```{r}
@@ -143,10 +144,11 @@ select(iris, Sepal.Width, Sepal.Length)
 ```
 
 ## summarize()
-Summarise/summarize permet de résumer les données à une valeur ou à un groupe de valeur en fonction des niveaux/facteurs d'une autre variables
+Summarise/summarize() permet de résumer les données à une valeur ou à un groupe de valeur en fonction des niveaux/facteurs d'une autre variables
 
 ```{r}
-# ex. summarise(data, moyenne = mean(variable), mediane = median(variable), N = n())
+# ex. summarise(data, moyenne = mean(variable), mediane = median(variable)
+#, N = n())
 
 summarise(iris, 
           moyenne = mean(Sepal.Width), 
@@ -157,7 +159,7 @@ summarise(iris,
 
 
 ## summarize() + group_by
-Summarise/summarize permet de résumer les données à une valeur ou à un groupe de valeur en fonction des niveaux/facteurs d'une autre variables
+Summarise/summarize() permet de résumer les données à une valeur ou à un groupe de valeur en fonction des niveaux/facteurs d'une autre variables
 
 ```{r}
 data_temp <- group_by(iris, Species)
@@ -170,7 +172,7 @@ summarise(data_temp,
 
 ## mutate()
 
-Mutate permet de modifier une colonne ou de créer une colonne en fonction d'une autre colonne. Cette fonction simplifie l'utilisation des boucles for (cf. cours R précédent)
+Mutate() permet de modifier une colonne ou de créer une colonne en fonction d'une autre colonne. Cette fonction simplifie l'utilisation des boucles for (cf. cours R précédent)
 
 ```{r}
 data_temp <- select(iris, Sepal.Width)
@@ -237,7 +239,7 @@ iris%>%
   summarise(somme = sum(Sepal.Length))
 ```
 
-Ici, cela implique que partant des données (iris), cette base de données est filtrée de telle manière à ce que Species contiennent uniquement Setosa comme valeur. Cette nouvelle base de données, seule la colonne Sepal.Length va être extraite, et finalement, sur cette colonne, la somme des valeurs va être calculée
+Ici, cela implique que partant des données (iris), cette base de données est filtrée de telle manière à ce que Species contienne uniquement Setosa comme valeur. De cette nouvelle base de données, seule la colonne Sepal.Length va être extraite, et finalement, sur cette colonne, la somme des valeurs va être calculée
 
 ## Exercices
 
@@ -350,7 +352,7 @@ ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
 
 ## ggplot: couche géométrie
 
-Attention, la géométrie dépend de la nature des variables, ggplot produira un output incohérent lorsque l'on souhaite insérer dans un boxplot une variable catégorielle.
+Attention, la géométrie dépend de la nature des variables, ggplot produira un output incohérent lorsque l'on souhaite insérer dans un boxplot deux variables continues.
 
 ```{r out.width = "500px"}
 ggplot(iris, aes(x = Sepal.Length, y = Petal.Width, fill = Species)) + 
