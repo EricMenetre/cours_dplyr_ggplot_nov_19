@@ -556,4 +556,28 @@ Permet de retracer toutes les versions précédentes d'un code ainsi que de trav
 
 Intégration parfaite avec R
 
-## 
+## Version control dans R
+
+```{r, echo=FALSE, out.width = "800px"}
+knitr::include_graphics("version_control_github.JPG")
+```
+
+## Version control dans R
+
+```{r, echo=FALSE, out.width = "800px"}
+knitr::include_graphics("version_control_proj.JPG")
+```
+
+## Version control dans R
+
+Nécessité de créer un repository (projet dans l'interface github)
+
+```{r, echo=FALSE, out.width = "800px"}
+knitr::include_graphics("version_control_repo.JPG")
+```
+
+## Version control dans R
+
+```{r, echo=FALSE, out.width = "800px"}
+knitr::include_graphics("version_control_git_onglet.JPG")
+```
