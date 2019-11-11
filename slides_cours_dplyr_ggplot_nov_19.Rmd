@@ -120,6 +120,8 @@ dplyr compte également des opérateurs complémentaires qui permettent de compl
 
 - if_else : dans le verbe mutate, correspond au SI dans Excel
 
+- ...
+
 ## filter()
 
 filter permet de sélectionner des lignes dans un data frame en fonction d'un critère
@@ -540,3 +542,18 @@ ggplot(iris, aes(x = Species, y = Sepal.Width)) + geom_boxplot(width = 0.5)+
   theme_minimal()
 
 ```
+
+
+# Introduction à Git 
+
+## Introduction à Git
+
+Git est un logiciel de version control
+
+Implique que le code est sauvegardé en permanence dans toutes ses versions sur un server.
+
+Permet de retracer toutes les versions précédentes d'un code ainsi que de travailler à plusieurs sur le même code
+
+Intégration parfaite avec R
+
+## 
