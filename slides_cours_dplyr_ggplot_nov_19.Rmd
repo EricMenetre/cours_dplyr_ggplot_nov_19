@@ -581,3 +581,10 @@ knitr::include_graphics("version_control_repo.JPG")
 ```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("version_control_git_onglet.JPG")
 ```
+
+
+## Version control dans R
+
+```{r, echo=FALSE, out.width = "800px"}
+knitr::include_graphics("version_control_commit.JPG")
+```
