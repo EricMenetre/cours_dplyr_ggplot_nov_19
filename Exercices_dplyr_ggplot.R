@@ -14,7 +14,7 @@ library(readxl)
 data_exercices <- read_excel("data_exercices.xlsx")
 View(data_exercices)
 
-library(ggplot2)
+
 library(dplyr)
 
 
@@ -30,9 +30,6 @@ library(dplyr)
 # lignes et en affichant la structure du document. Pour cela utilisez 
 # les fonctions head() et str()
 
-head(data_exercices)
-
-str(data_exercices)
 
 ##--------------
 ##  Question 2  
@@ -48,9 +45,7 @@ str(data_exercices)
 # data frame nommé data_no_NA contenant uniquement les valeurs pour la variable RT. Attention,
 # pensez bien à charger le package dplyr avant de commencer. 
 
-library(dplyr)
 
-data_no_na <- filter(data_exercices, !is.na(RT))
 
 ##--------------
 ##  Question 3  
@@ -62,7 +57,7 @@ data_no_na <- filter(data_exercices, !is.na(RT))
 # de recopier tous les noms de variables, soit d'écire uniquement la variable accuracy
 # précédée d'un -.Sauvegardez le résultat dans un data frame appelé data_no_na_RT.
 
-data_no_na_RT <- select(data_no_na, -accuracy)
+
 
 ##--------------
 ##  Question 4  
@@ -72,9 +67,7 @@ data_no_na_RT <- select(data_no_na, -accuracy)
 # moyennes et écarts-types par condition et par groupe d'âge du data frame data_na_no_RT. 
 #Appelez ces deux statistiques moyennes et ET.
 
-data_no_na_RT%>%
-  group_by(group, condition)%>%
-  summarise(moyenne = mean(RT), ET = sd(RT))
+
 
 ##--------------
 ##  Question 5  
@@ -86,8 +79,7 @@ data_no_na_RT%>%
 # sauvegardez le dataframe sous le nom data_no_na_RT_EEG
 
 
-data_no_na_RT_EEG <- data_no_na_RT%>%
-  mutate(RT_EEG = RT-100)
+
 
 
 ##----------------------------------------------------------------
@@ -103,7 +95,7 @@ library(ggplot2)
 # établissez un boxplot des TR par condition. et sauvegardez le plot sous le 
 # nom p1. Utilisez également le data frame data_no_na_RT_EEG
 
-p1 <- ggplot(data_no_na_RT_EEG, aes(x = condition, y = RT)) + geom_boxplot()
+
 
 ##--------------
 ##  Question 2  
@@ -112,8 +104,7 @@ p1 <- ggplot(data_no_na_RT_EEG, aes(x = condition, y = RT)) + geom_boxplot()
 # Afin de comprendre l'évolution des RT en fonction des groupes d'âges, assignez
 # la variable groupe à l'aesthetic fill. Nommez ce plot p2.
 
-p2 <- ggplot(data_no_na_RT_EEG, aes(x = condition, y = RT, fill = group))+ geom_boxplot()
-p2 
+
 
 ##--------------
 ##  Question 2  
@@ -125,7 +116,7 @@ p2
 # Nommez votre plot p3
 
 
-p3 <- p2 + scale_fill_brewer(palette = "Blues")
+
 
 ##--------------
 ##  Question 3  
@@ -141,8 +132,7 @@ p3 <- p2 + scale_fill_brewer(palette = "Blues")
 # légende". 
 # nommez votre plot p4
 
-p3 + labs(title = "Mon joli plot", x = "Current Trial", fill = "Age Groups") +
-  theme_minimal()
+
 
 ##--------------
 ##  Question 3  
@@ -155,6 +145,4 @@ plot2 <-  ggplot(data_no_na_RT_EEG, aes(x = condition, y = RT)) + geom_boxplot(c
 plot1
 plot2
 
-# Le premier code utilise l'argument color comme une aesthetic, c'est pourquoi il est possible de l'attribuer
-# à une variable et non à une valeur (telle que red). Le second code, donne une valeur à appliquer à appliquer
-# de manière générale à tout le plot (ou tout du moins à l'élément geom_boxplot)
+
