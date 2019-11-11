@@ -14,6 +14,9 @@ library(readxl)
 data_exercices <- read_excel("data_exercices.xlsx")
 View(data_exercices)
 
+library(ggplot2)
+library(dplyr)
+
 
 ##----------------------------------------------------------------
 ##                          Exercice 1                           -
@@ -141,3 +144,17 @@ p3 <- p2 + scale_fill_brewer(palette = "Blues")
 p3 + labs(title = "Mon joli plot", x = "Current Trial", fill = "Age Groups") +
   theme_minimal()
 
+##--------------
+##  Question 3  
+##--------------
+# Quelle est la différence entre ces deux codes: 
+  
+plot1 <-  ggplot(data_no_na_RT_EEG, aes(x = condition, y = RT, color = group)) + geom_boxplot()
+plot2 <-  ggplot(data_no_na_RT_EEG, aes(x = condition, y = RT)) + geom_boxplot(color = "red")
+
+plot1
+plot2
+
+# Le premier code utilise l'argument color comme une aesthetic, c'est pourquoi il est possible de l'attribuer
+# à une variable et non à une valeur (telle que red). Le second code, donne une valeur à appliquer à appliquer
+# de manière générale à tout le plot (ou tout du moins à l'élément geom_boxplot)
